@@ -17,6 +17,7 @@ limitations under the License.
 #include "stdafx.h"
 #include "ykush_help.h"
 #include <stdio.h>
+#include <string>
 
 
 
@@ -41,8 +42,14 @@ void Help::print(void)
 
     if(fp==NULL)
     {
-        printf("\n\nHelp file not found.\n\n");
-        return;
+        std::string doc_file("/usr/share/doc/");
+        doc_file += file_name;
+        fp = fopen(doc_file.c_str(), "r");
+        if (fp == NULL)
+        {
+            printf("\n\nHelp file not found.\n\n");
+            return;
+        }
     }
 
     //print line by line
